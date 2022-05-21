@@ -1,5 +1,6 @@
 import React from 'react'
 import img1 from '../imgs/1.png'
+import StyleSheet from './cards.css'
 
 export default function Cards({id, text, imgsrc, clicked, randcards}) {
   function btnclick(){
@@ -20,9 +21,10 @@ export default function Cards({id, text, imgsrc, clicked, randcards}) {
    
   }
   return (
-    <div onClick={btnclick}>
+    
+    <div className="card" onClick={btnclick}>
       <center>
-    <img src={imgsrc} />
+    <img className='img' src={imgsrc} />
     <div>{text}</div>
     </center>
     </div>
