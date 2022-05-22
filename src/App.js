@@ -9,11 +9,11 @@ import img4 from './imgs/4.jpg'
 import img5 from './imgs/5.jpg'
 import StyleSheet from './style.css'
 
-let points = 0;
-let maxscore = 0;
 
 function App() {
-  const [cardslist, setCardslist] = useState([{
+const [points, setPoints] = useState(0);
+const [maxscore, setMaxscore] = useState(0);
+  const cardsarray = [{
     id: uuidv4(),
     text: "Flufi",
     imgsrc: img1,
@@ -39,7 +39,8 @@ function App() {
     text: "Wint",
     imgsrc: img5,
     clicked: false
-  }]);
+  }]
+  const [cardslist, setCardslist] = useState(cardsarray);
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
@@ -49,11 +50,35 @@ function shuffleArray(array) {
       array[j] = temp;
   }
 }
+function restartgame(){
+  alert("The Game End :( and you made " + points + "points");
+  if(points > maxscore){
+    setMaxscore(points);
+  }
+  setPoints(0);
+  setCardslist(cardsarray);
+  randcards();
+}
 function randcards(){
   let newcardsarray = [...cardslist];
   shuffleArray(newcardsarray);
   setCardslist(newcardsarray);
 }
+function cardclickHandle(id){
+  const newcardsarray = [...cardslist];
+  const card = cardslist.find(card => card.id === id);
+  card.clicked = !card.clicked;
+  console.log(newcardsarray);
+  setCardslist(newcardsarray);
+}
+/*
+ function checkHandle(id){
+  const newtodos = [...arraytodos];
+  const todo = newtodos.find(todo => todo.id === id);
+  todo.checked = !todo.checked;
+  setArraytodos(newtodos);
+ }
+*/
 
   useEffect(() => {
    randcards();
@@ -66,7 +91,7 @@ function randcards(){
         <h3>Points: {points} </h3>
         <h3>Max Score: {maxscore}</h3>
     <div className='cards'>
-      <Memorycards cardsarray={cardslist} setCardlistfun={setCardslist} randcardf={randcards}/>
+      <Memorycards cardsarray={cardslist} setCardlistfun={setCardslist} randcardf={randcards} handleclicard={cardclickHandle} pointsvar={points} setPointsvar={setPoints} restart={restartgame}/>
     </div>
      </center>
     </div>

@@ -2,22 +2,19 @@ import React from 'react'
 import img1 from '../imgs/1.png'
 import StyleSheet from './cards.css'
 
-export default function Cards({id, text, imgsrc, clicked, randcards}) {
+export default function Cards({id, text, imgsrc, clicked, randcards, alreadyclick, points, setPoints, restartgame}) {
   function btnclick(){
-    if(clicked == true){
-      clicked = false;
-      alert("You lost!");
-      //samepoints.
-      //restartgame
-    }else{
-    
-    if(clicked == false){
-      randcards();
+    console.log(clicked);
+    setPoints(points + 1);
+    if(clicked == false)
+    {
       clicked = true;
-      //makepoints
     }
-  }
-    
+    else{
+      restartgame();
+    }
+    alreadyclick(id);
+    randcards();
    
   }
   return (

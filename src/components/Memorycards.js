@@ -1,10 +1,10 @@
 import React from 'react'
 import Cards from './Cards'
 
-export default function Memorycards({ cardsarray,  setCardlistfun, randcardf}) {
+export default function Memorycards({restart, cardsarray,  setCardlistfun, randcardf, handleclicard,  pointsvar, setPointsvar}) {
   return (
     cardsarray.map(cards =>  {
-        return <Cards key={cards.id} id={cards.id} text={cards.text} imgsrc={cards.imgsrc} clicked={cards.clicked} randcards={randcardf}/> ;
+        return <Cards key={cards.id} id={cards.id} text={cards.text} imgsrc={cards.imgsrc} clicked={cards.clicked} randcards={randcardf} alreadyclick={handleclicard} restartgame={restart} points={pointsvar} setPoints={setPointsvar}/> ;
     })
   )
 }
